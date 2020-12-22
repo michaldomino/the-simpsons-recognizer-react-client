@@ -1,6 +1,7 @@
 import React from "react";
 import {useForm} from "react-hook-form";
-import {LoginResponse} from "../models/responses/LoginResponse";
+import {Token} from "../models/responses/Token";
+import {useAuthenticationDispatch, useAuthenticationState} from "../context/authentication/producer";
 
 interface LoginData {
     username: string
@@ -9,8 +10,10 @@ interface LoginData {
 
 export const LoginForm: React.FC = () => {
     const {register, handleSubmit} = useForm()
+    const dispatch = useAuthenticationDispatch()
+    const authenticationState = useAuthenticationState()
 
-    const onSubmit = async (data: LoginData) => {
+    const onSubmit = async (loginData: LoginData) => {
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -18,16 +21,20 @@ export const LoginForm: React.FC = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                    username: data.username,
-                    password: data.password
+                    username: loginData.username,
+                    password: loginData.password
                 }
             )
         };
+        dispatch({type: 'REQUEST_LOGIN'})
         const response = await fetch('http://localhost:8000/authentication/api/login', requestOptions)
-        console.log(response.statusText)
-        const loginResponse = await response.json() as LoginResponse
-        console.log(`Refresh token: ${loginResponse.refresh}`)
-        console.log(`Access token: ${loginResponse.access}`)
+        if (response.status === 200) {
+            console.log(response.statusText)
+            const loginResponse = await response.json() as Token
+            console.log(`Refresh token: ${loginResponse.refresh}`)
+            console.log(`Access token: ${loginResponse.access}`)
+            dispatch({type: 'LOGIN_SUCCESS', payload: loginResponse})
+        }
     }
 
     return (
