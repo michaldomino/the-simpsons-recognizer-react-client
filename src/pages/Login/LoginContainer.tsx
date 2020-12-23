@@ -13,49 +13,51 @@ interface ILoginContainerProps {
 }
 
 export const LoginContainer = (props: ILoginContainerProps) => {
+    const {handleSubmit, onSubmit, register, usernameErrors, passwordErrors, password2Errors} = props
+    
     return (
-        <form onSubmit={props.handleSubmit(props.onSubmit)}>
-            <Grid
-                container
-                justify="center"
-                direction="column"
-                alignItems="center"
-                spacing={2}
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid container
+                  justify="center"
+                  direction="column"
+                  alignItems="center"
+                  spacing={2}
             >
                 <Grid item>
                     <Controls.AppTextField
-                        inputRef={props.register}
+                        inputRef={register}
                         name='username'
                         label='Username'
-                        error={props.usernameErrors !== ''}
-                        helperText={props.usernameErrors}
+                        error={usernameErrors !== ''}
+                        helperText={usernameErrors}
                     />
                 </Grid>
 
                 <Grid item>
-                <Controls.AppTextField
-                    inputRef={props.register}
-                    name='password'
-                    label='Password'
-                    type='password'
-                    error={props.passwordErrors !== ''}
-                    helperText={props.passwordErrors}
-                />
+                    <Controls.AppTextField
+                        inputRef={register}
+                        name='password'
+                        label='Password'
+                        type='password'
+                        error={passwordErrors !== ''}
+                        helperText={passwordErrors}
+                    />
                 </Grid>
-                    <Grid item>
-                <Controls.AppTextField
-                    inputRef={props.register}
-                    name='password2'
-                    label='Confirm password'
-                    type='password'
-                    error={props.password2Errors !== ''}
-                    helperText={props.password2Errors}
-                />
-                    </Grid>
-
-                        <Grid item>
-                <Controls.AppButton text='Submit' type='submit'/>
-                        </Grid>
+                
+                <Grid item>
+                    <Controls.AppTextField
+                        inputRef={register}
+                        name='password2'
+                        label='Confirm password'
+                        type='password'
+                        error={password2Errors !== ''}
+                        helperText={password2Errors}
+                    />
+                </Grid>
+                
+                <Grid item>
+                    <Controls.AppButton text='Submit' type='submit'/>
+                </Grid>
             </Grid>
         </form>
     )
