@@ -6,6 +6,7 @@ import {LoginData} from "../../models/LoginData";
 import {AuthenticationService} from "../../services/AuthenticationService";
 import {LoginBadResponse} from "../../models/responses/LoginBadResponse";
 import {LoginContainer} from "./LoginContainer";
+import {LoginUnauthorizedResponse} from "../../models/responses/LoginUnauthorizedResponse";
 
 
 export const Login: React.FC = () => {
@@ -14,10 +15,13 @@ export const Login: React.FC = () => {
     const [passwordErrors, setPasswordErrors] = useState('')
     const [password2Errors, setPassword2Errors] = useState('')
     const dispatch = useAuthenticationDispatch()
+    const authenticationService = new AuthenticationService()
 
     const onSubmit = async (loginData: LoginData) => {
         try {
-            console.log(loginData)
+            setUsernameErrors('')
+            setPasswordErrors('')
+            setPassword2Errors('')
             dispatch({type: "REQUEST_LOGIN"})
             const {password, password2} = getValues(['password', 'password2'])
             if (password !== password2) {
@@ -25,24 +29,27 @@ export const Login: React.FC = () => {
                 setPassword2Errors('Passwords do not match')
                 return
             }
-            const authenticationService = new AuthenticationService()
             const response = await authenticationService.login(loginData)
             const loginResponse = await response.json()
             console.log(loginResponse)
-            if (response.status === 200) {
-                dispatch({type: 'LOGIN_SUCCESS', payload: loginResponse as Token})
-                return
-            }
-            dispatch({type: 'LOGIN_ERROR'})
-            if (response.status === 400) {
-                const loginBadResponse = loginResponse as LoginBadResponse
-                if (loginBadResponse.username) {
-                    setUsernameErrors(loginBadResponse.username.join(' '))
-                }
-                if (loginBadResponse.password) {
-                    setPasswordErrors(loginBadResponse.password.join(' '))
-                }
-                return
+            switch (response.status) {
+                case 200:
+                    dispatch({type: 'LOGIN_SUCCESS', payload: loginResponse as Token})
+                    break
+                case 400:
+                    dispatch({type: 'LOGIN_ERROR'})
+                    const loginBadResponse = loginResponse as LoginBadResponse
+                    if (loginBadResponse.username) {
+                        setUsernameErrors(loginBadResponse.username.join(' '))
+                    }
+                    if (loginBadResponse.password) {
+                        setPasswordErrors(loginBadResponse.password.join(' '))
+                    }
+                    break
+                case 401:
+                    dispatch({type: 'LOGIN_ERROR'})
+                    const loginUnauthenticatedResponse = loginResponse as LoginUnauthorizedResponse
+                    console.log(loginUnauthenticatedResponse)
             }
         } catch {
             dispatch({type: 'LOGIN_ERROR'})
