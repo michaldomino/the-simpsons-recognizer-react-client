@@ -7,32 +7,39 @@ export interface IAuthenticationState {
 }
 
 export const initialState: IAuthenticationState = {
-    accessToken: "",
+    accessToken: '',
     isLoading: false,
-    isLoggedIn: false
+    isLoggedIn: false,
 };
 
-export type AuthenticationAction = { type: 'REQUEST_LOGIN' } | { type: 'LOGIN_SUCCESS', payload: Token }
+export type AuthenticationAction =
+    { type: 'REQUEST_LOGIN' }
+    | { type: 'LOGIN_SUCCESS', payload: Token }
+    | { type: 'LOGOUT' }
+    | { type: 'LOGIN_ERROR' }
 
 export function authenticationReducer(previousState: IAuthenticationState, action: AuthenticationAction): IAuthenticationState {
     switch (action.type) {
         case 'REQUEST_LOGIN':
-            console.log("Request")
-            console.log("Previous state:")
             console.log(JSON.stringify(previousState))
             return {
                 ...previousState,
                 isLoading: true
             }
         case 'LOGIN_SUCCESS':
-            console.log("Login success")
-            console.log("Previous state:")
             console.log(JSON.stringify(previousState))
             return {
                 ...previousState,
                 isLoading: false,
                 isLoggedIn: true,
                 accessToken: action.payload.access
+            }
+        case 'LOGOUT':
+            return initialState
+        case "LOGIN_ERROR":
+            return {
+                ...previousState,
+                isLoading: false
             }
     }
 }
