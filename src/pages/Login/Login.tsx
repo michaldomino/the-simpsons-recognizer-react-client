@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import {Token} from "../models/responses/Token";
-import {useAuthenticationDispatch} from "../context/authentication/producer";
-import {LoginData} from "../models/LoginData";
-import {AuthenticationService} from "../services/AuthenticationService";
-import {LoginBadResponse} from "../models/responses/LoginBadResponse";
-import {TextField} from "@material-ui/core";
+import {Token} from "../../models/responses/Token";
+import {useAuthenticationDispatch} from "../../context/authentication/producer";
+import {LoginData} from "../../models/LoginData";
+import {AuthenticationService} from "../../services/AuthenticationService";
+import {LoginBadResponse} from "../../models/responses/LoginBadResponse";
+import {LoginContainer} from "./LoginContainer";
 
 
-export const LoginForm: React.FC = () => {
+export const Login: React.FC = () => {
     const {register, handleSubmit, getValues} = useForm()
     const [usernameErrors, setUsernameErrors] = useState('')
     const [passwordErrors, setPasswordErrors] = useState('')
@@ -50,34 +50,13 @@ export const LoginForm: React.FC = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <TextField
-                inputRef={register}
-                name='username'
-                placeholder='Username'
-                error={usernameErrors !== ''}
-                helperText={usernameErrors}
-            />
-            <br/>
-            <TextField
-                inputRef={register}
-                name='password'
-                placeholder='Password'
-                type='password'
-                error={passwordErrors !== ''}
-                helperText={passwordErrors}
-            />
-            <br/>
-            <TextField
-                inputRef={register}
-                name='password2'
-                placeholder='Confirm password'
-                type='password'
-                error={password2Errors !== ''}
-                helperText={password2Errors}
-            />
-            <br/>
-            <button>Submit</button>
-        </form>
+        <LoginContainer
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            usernameErrors={usernameErrors}
+            passwordErrors={passwordErrors}
+            password2Errors={password2Errors}
+        />
     )
 }

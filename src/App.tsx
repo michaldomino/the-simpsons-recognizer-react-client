@@ -1,13 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {LoginForm} from "./components/LoginForm";
+import {Login} from "./pages/Login/Login";
 import {AuthenticationProvider} from "./context/authentication/producer";
 
 function App() {
     return (
         <AuthenticationProvider>
-            <LoginForm/>
+            <Login/>
         </AuthenticationProvider>
         // <div className="App">
         //   <header className="App-header">
