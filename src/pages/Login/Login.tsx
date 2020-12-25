@@ -14,6 +14,7 @@ export const Login: React.FC = () => {
     const [usernameErrors, setUsernameErrors] = useState('')
     const [passwordErrors, setPasswordErrors] = useState('')
     const [password2Errors, setPassword2Errors] = useState('')
+    const [formErrors, setFormErrors] = useState('')
     const dispatch = useAuthenticationDispatch()
     const authenticationService = new AuthenticationService()
 
@@ -49,7 +50,7 @@ export const Login: React.FC = () => {
                 case 401:
                     dispatch({type: 'LOGIN_ERROR'})
                     const loginUnauthenticatedResponse = loginResponse as LoginUnauthorizedResponse
-                    console.log(loginUnauthenticatedResponse)
+                    setFormErrors(loginUnauthenticatedResponse.detail)
             }
         } catch {
             dispatch({type: 'LOGIN_ERROR'})
@@ -64,6 +65,7 @@ export const Login: React.FC = () => {
             usernameErrors={usernameErrors}
             passwordErrors={passwordErrors}
             password2Errors={password2Errors}
+            formErrors={formErrors}
         />
     )
 }
