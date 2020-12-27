@@ -1,6 +1,8 @@
 import React from 'react';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
-import {Login} from "./pages/login/Login";
+import {Login} from './pages/login/Login';
+import {Register} from "./pages/register/Register";
 import {AuthenticationProvider} from "./context/authentication/producer";
 
 
@@ -9,7 +11,12 @@ function App() {
 
     return (
         <AuthenticationProvider>
-            <Login/>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path='/' component={Login} />
+                    <Route exact path='/register' component={Register}/>
+                </Switch>
+            </BrowserRouter>
         </AuthenticationProvider>
         // <div className="App">
         //   <header className="App-header">
