@@ -18,6 +18,7 @@ export const LoginContainer = (props: ILoginContainerProps) => {
 
     return (
         <div>
+            <Controls.LoginAppBar/>
             <br/>
             <FormControl error={formErrors !== ''}>
                 <form onSubmit={handleSubmit(onSubmit)}>
