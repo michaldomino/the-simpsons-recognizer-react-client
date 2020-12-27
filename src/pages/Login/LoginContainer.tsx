@@ -17,55 +17,58 @@ export const LoginContainer = (props: ILoginContainerProps) => {
     const {handleSubmit, onSubmit, register, usernameErrors, passwordErrors, password2Errors, formErrors} = props
 
     return (
-        <FormControl error={formErrors !== ''}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Grid container
-                      justify="center"
-                      direction="column"
-                      alignItems="center"
-                      spacing={2}
-                >
-                    <Grid item>
-                        <Controls.AppTextField
-                            inputRef={register}
-                            name='username'
-                            label='Username'
-                            error={usernameErrors !== ''}
-                            helperText={usernameErrors}
-                        />
-                    </Grid>
+        <div>
+            <br/>
+            <FormControl error={formErrors !== ''}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Grid container
+                          justify="center"
+                          direction="column"
+                          alignItems="center"
+                          spacing={2}
+                    >
+                        <Grid item>
+                            <Controls.AppTextField
+                                inputRef={register}
+                                name='username'
+                                label='Username'
+                                error={usernameErrors !== ''}
+                                helperText={usernameErrors}
+                            />
+                        </Grid>
 
-                    <Grid item>
-                        <Controls.AppTextField
-                            inputRef={register}
-                            name='password'
-                            label='Password'
-                            type='password'
-                            error={passwordErrors !== ''}
-                            helperText={passwordErrors}
-                        />
-                    </Grid>
+                        <Grid item>
+                            <Controls.AppTextField
+                                inputRef={register}
+                                name='password'
+                                label='Password'
+                                type='password'
+                                error={passwordErrors !== ''}
+                                helperText={passwordErrors}
+                            />
+                        </Grid>
 
-                    <Grid item>
-                        <Controls.AppTextField
-                            inputRef={register}
-                            name='password2'
-                            label='Confirm password'
-                            type='password'
-                            error={password2Errors !== ''}
-                            helperText={password2Errors}
-                        />
-                    </Grid>
+                        <Grid item>
+                            <Controls.AppTextField
+                                inputRef={register}
+                                name='password2'
+                                label='Confirm password'
+                                type='password'
+                                error={password2Errors !== ''}
+                                helperText={password2Errors}
+                            />
+                        </Grid>
 
-                    <Grid item>
-                        <FormHelperText>{formErrors}</FormHelperText>
-                    </Grid>
+                        <Grid item>
+                            <FormHelperText>{formErrors}</FormHelperText>
+                        </Grid>
 
-                    <Grid item>
-                        <Controls.AppButton text='Submit' type='submit'/>
+                        <Grid item>
+                            <Controls.AppButton text='Submit' type='submit'/>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </form>
-        </FormControl>
+                </form>
+            </FormControl>
+        </div>
     )
 }
