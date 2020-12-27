@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Login} from "./pages/Login/Login";
+import {Login} from "./pages/login/Login";
 import {AuthenticationProvider} from "./context/authentication/producer";
 
 
