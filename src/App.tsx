@@ -1,12 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Login} from "./pages/Login/Login";
 import {AuthenticationProvider} from "./context/authentication/producer";
+import {LoginAppBar} from "./components/controls/LoginAppBar";
+
 
 function App() {
+
+
     return (
         <AuthenticationProvider>
+            <LoginAppBar/>
+            {/*<AppBar position='static'>*/}
+            {/*    <Toolbar>*/}
+            {/*        <Typography variant='h6'>*/}
+            {/*            Login*/}
+            {/*        </Typography>*/}
+            {/*        <Controls.AppButton text={'Register'} />*/}
+            {/*    </Toolbar>*/}
+            {/*</AppBar>*/}
             <Login/>
         </AuthenticationProvider>
         // <div className="App">
