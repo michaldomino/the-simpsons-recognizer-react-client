@@ -10,10 +10,9 @@ import {LoginUnauthorizedResponse} from "../../models/responses/LoginUnauthorize
 
 
 export const Login: React.FC = () => {
-    const {register, handleSubmit, getValues} = useForm()
+    const {register, handleSubmit} = useForm()
     const [usernameErrors, setUsernameErrors] = useState('')
     const [passwordErrors, setPasswordErrors] = useState('')
-    const [password2Errors, setPassword2Errors] = useState('')
     const [formErrors, setFormErrors] = useState('')
     const dispatch = useAuthenticationDispatch()
     const authenticationService = new AuthenticationApiService()
@@ -22,14 +21,7 @@ export const Login: React.FC = () => {
         try {
             setUsernameErrors('')
             setPasswordErrors('')
-            setPassword2Errors('')
             dispatch({type: "REQUEST_LOGIN"})
-            const {password, password2} = getValues(['password', 'password2'])
-            if (password !== password2) {
-                dispatch({type: 'LOGIN_ERROR'})
-                setPassword2Errors('Passwords do not match')
-                return
-            }
             const response = await authenticationService.login(loginData)
             const loginResponse = await response.json()
             console.log(loginResponse)
@@ -64,7 +56,6 @@ export const Login: React.FC = () => {
             register={register}
             usernameErrors={usernameErrors}
             passwordErrors={passwordErrors}
-            password2Errors={password2Errors}
             formErrors={formErrors}
         />
     )
