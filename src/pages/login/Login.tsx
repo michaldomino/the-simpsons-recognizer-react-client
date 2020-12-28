@@ -7,6 +7,7 @@ import {AuthenticationApiService} from "../../services/api/AuthenticationApiServ
 import {LoginBadResponse} from "../../models/responses/LoginBadResponse";
 import {LoginContainer} from "./LoginContainer";
 import {LoginUnauthorizedResponse} from "../../models/responses/LoginUnauthorizedResponse";
+import {useHistory} from "react-router-dom";
 
 
 export const Login: React.FC = () => {
@@ -15,6 +16,7 @@ export const Login: React.FC = () => {
     const [passwordErrors, setPasswordErrors] = useState('')
     const [formErrors, setFormErrors] = useState('')
     const dispatch = useAuthenticationDispatch()
+    const history = useHistory()
     const authenticationService = new AuthenticationApiService()
 
     const onSubmit = async (loginData: LoginData) => {
@@ -28,6 +30,7 @@ export const Login: React.FC = () => {
             switch (response.status) {
                 case 200:
                     dispatch({type: 'LOGIN_SUCCESS', payload: loginResponse as Token})
+                    history.push('/')
                     break
                 case 400:
                     dispatch({type: 'LOGIN_ERROR'})
