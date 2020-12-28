@@ -18,7 +18,7 @@ export const RegisterContainer: React.FC<IRegisterContainerProps> = (props) => {
 
     return (
         <div>
-            <Controls.LoginAppBar/>
+            <Controls.RegisterAppBar/>
             <br/>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Grid container

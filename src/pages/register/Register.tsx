@@ -34,14 +34,15 @@ export const Register: React.FC = () => {
                 break
             case 400:
                 const registerBadResponse = registerResponse as RegisterBadResponse
+                console.log(registerBadResponse)
                 if (registerBadResponse.username) {
                     setUsernameErrors(registerBadResponse.username.join(' '))
                 }
                 if (registerBadResponse.email) {
-                    setUsernameErrors(registerBadResponse.email.join(' '))
+                    setEmailErrors(registerBadResponse.email.join(' '))
                 }
                 if (registerBadResponse.password) {
-                    setUsernameErrors(registerBadResponse.password.join(' '))
+                    setPasswordErrors(registerBadResponse.password.join(' '))
                 }
                 break
         }
