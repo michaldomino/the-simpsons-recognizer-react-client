@@ -1,9 +1,8 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Switch} from 'react-router-dom';
 import './App.css';
-import {Login} from './pages/login/Login';
-import {Register} from "./pages/register/Register";
 import {AuthenticationProvider} from "./context/authentication/producer";
+import routes from "./config/routes";
 
 
 function App() {
@@ -13,8 +12,7 @@ function App() {
         <AuthenticationProvider>
             <BrowserRouter>
                 <Switch>
-                    <Route exact path='/' component={Login} />
-                    <Route exact path='/register' component={Register}/>
+                    {routes}
                 </Switch>
             </BrowserRouter>
         </AuthenticationProvider>
