@@ -1,14 +1,14 @@
 import React from "react";
 import {BaseAppBar} from "./BaseAppBar";
 
-export const LoginAppBar = () => {
+export const RegisterAppBar = () => {
     return (
         <BaseAppBar
-            title={'Login'}
+            title={'Register'}
             buttons={[
                 {
-                    text: 'Register',
-                    onClickAction: () => console.log('Register clicked')
+                    text: 'Login',
+                    onClickAction: () => console.log('Login clicked')
                 }
             ]}
         />
