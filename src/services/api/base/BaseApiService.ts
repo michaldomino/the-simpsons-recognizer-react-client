@@ -1,5 +1,5 @@
 export abstract class BaseApiService {
-    async postRequest(requestObject: any, apiLink: string): Promise<Response> {
+    protected async postRequest(requestObject: any, apiLink: string): Promise<Response> {
         const requestOptions = {
             method: 'POST',
             headers: {

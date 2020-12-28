@@ -3,7 +3,7 @@ import {useForm} from "react-hook-form";
 import {Token} from "../../models/responses/Token";
 import {useAuthenticationDispatch} from "../../context/authentication/producer";
 import {LoginData} from "../../models/LoginData";
-import {AuthenticationService} from "../../services/AuthenticationService";
+import {AuthenticationApiService} from "../../services/api/AuthenticationApiService";
 import {LoginBadResponse} from "../../models/responses/LoginBadResponse";
 import {LoginContainer} from "./LoginContainer";
 import {LoginUnauthorizedResponse} from "../../models/responses/LoginUnauthorizedResponse";
@@ -16,7 +16,7 @@ export const Login: React.FC = () => {
     const [password2Errors, setPassword2Errors] = useState('')
     const [formErrors, setFormErrors] = useState('')
     const dispatch = useAuthenticationDispatch()
-    const authenticationService = new AuthenticationService()
+    const authenticationService = new AuthenticationApiService()
 
     const onSubmit = async (loginData: LoginData) => {
         try {
