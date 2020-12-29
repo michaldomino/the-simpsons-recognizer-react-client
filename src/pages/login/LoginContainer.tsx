@@ -9,12 +9,11 @@ interface ILoginContainerProps {
     register: any,
     usernameErrors: string,
     passwordErrors: string,
-    password2Errors: string,
     formErrors: string
 }
 
 export const LoginContainer = (props: ILoginContainerProps) => {
-    const {handleSubmit, onSubmit, register, usernameErrors, passwordErrors, password2Errors, formErrors} = props
+    const {handleSubmit, onSubmit, register, usernameErrors, passwordErrors, formErrors} = props
 
     return (
         <div>
@@ -46,17 +45,6 @@ export const LoginContainer = (props: ILoginContainerProps) => {
                                 type='password'
                                 error={passwordErrors !== ''}
                                 helperText={passwordErrors}
-                            />
-                        </Grid>
-
-                        <Grid item>
-                            <Controls.AppTextField
-                                inputRef={register}
-                                name='password2'
-                                label='Confirm password'
-                                type='password'
-                                error={password2Errors !== ''}
-                                helperText={password2Errors}
                             />
                         </Grid>
 

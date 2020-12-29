@@ -2,16 +2,16 @@ import React from "react";
 import {BaseAppBar} from "./BaseAppBar";
 import {useHistory} from "react-router-dom";
 
-export const LoginAppBar = () => {
+export const RegisterAppBar = () => {
     const history = useHistory()
 
     return (
         <BaseAppBar
-            title={'Login'}
+            title={'Register'}
             buttons={[
                 {
-                    text: 'Register',
-                    onClickAction: () => history.push('/register')
+                    text: 'Login',
+                    onClickAction: () => history.push('/login')
                 }
             ]}
         />
