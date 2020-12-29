@@ -53,7 +53,9 @@ export const LoginContainer = (props: ILoginContainerProps) => {
                         </Grid>
 
                         <Grid item>
-                            <Controls.AppButton text='Submit' type='submit'/>
+                            <Controls.AppButton type='submit'>
+                                Submit
+                            </Controls.AppButton>
                         </Grid>
                     </Grid>
                 </form>
