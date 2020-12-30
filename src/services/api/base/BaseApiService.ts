@@ -1,5 +1,8 @@
 export abstract class BaseApiService {
-    protected async postRequest(requestObject: any, apiLink: string): Promise<Response> {
+
+    protected static readonly BASE_API_LINK = 'http://localhost:8000'
+
+    protected async postJsonRequest(requestObject: any, apiLink: string): Promise<Response> {
         const requestOptions = {
             method: 'POST',
             headers: {

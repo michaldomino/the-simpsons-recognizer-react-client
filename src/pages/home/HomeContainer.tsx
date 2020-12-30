@@ -7,10 +7,11 @@ interface IHomeContainerProps {
     onSubmit: () => Promise<void>
     handleUploadClick: (event: any) => void
     image: File | undefined
+    prediction: string
 }
 
 export const HomeContainer: React.FC<IHomeContainerProps> = (props) => {
-    const {handleSubmit, onSubmit, handleUploadClick, image} = props
+    const {handleSubmit, onSubmit, handleUploadClick, image, prediction} = props
 
     return (
         <Grid container
@@ -50,6 +51,12 @@ export const HomeContainer: React.FC<IHomeContainerProps> = (props) => {
                         Submit
                     </Controls.AppButton>
                 </form>
+            </Grid>
+
+            <Grid item>
+                <h1>
+                    {prediction}
+                </h1>
             </Grid>
         </Grid>
     )

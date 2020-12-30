@@ -1,24 +1,36 @@
 import React, {useState} from "react";
 import {HomeContainer} from "./HomeContainer";
 import {useForm} from "react-hook-form";
+import {PredictionResponse} from "../../models/responses/PredictionResponse";
+import {ImageApiService} from "../../services/api/ImageApiService";
 
 export const Home: React.FC = () => {
     const {handleSubmit} = useForm()
     const [image, setImage] = useState<File>()
+    const [prediction, setPrediction] = useState('')
+    const imageApiService = new ImageApiService()
 
     const onSubmit = async () => {
-        if (image) {
-            const formData = new FormData()
-            formData.append('image', image)
-            const requestOptions = {
-                method: 'POST',
-                body: formData
-            };
-            const response = await fetch('http://localhost:8000/image/api/predict', requestOptions)
-            const responseData = await response.json()
-            console.log(responseData)
+        try {
+            if (image) {
+                setPrediction('...')
+                const response = await imageApiService.predict(image)
+                const responseData = await response.json()
+                switch (response.status) {
+                    case 200:
+                        const predictionResponse = responseData as PredictionResponse
+                        setPrediction(predictionResponse.prediction)
+                        break
+                    default:
+                        setPrediction('Something went wrong')
+                        break
+                }
+            }
+        } catch {
+            setPrediction('Something went wrong')
         }
     }
+
 
     const handleUploadClick = (event: any) => {
         const file: File = event.target.files[0]
@@ -31,6 +43,7 @@ export const Home: React.FC = () => {
             onSubmit={onSubmit}
             handleUploadClick={handleUploadClick}
             image={image}
+            prediction={prediction}
         />
     )
 }
