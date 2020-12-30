@@ -5,13 +5,13 @@ interface IAppButtonProps {
     variant?: 'text' | 'outlined' | 'contained' | undefined
 }
 
-export const AppButton = (props: IAppButtonProps | ButtonProps) => {
-    const {variant, ...rest} = props as any
+export const AppButton = (props: IAppButtonProps & Omit<ButtonProps, keyof IAppButtonProps>) => {
+    const {variant, ...other} = props as any
     return (
         <Button
             variant={variant || 'contained'}
             color='primary'
-            {...rest}
+            {...other}
         />
     )
 }

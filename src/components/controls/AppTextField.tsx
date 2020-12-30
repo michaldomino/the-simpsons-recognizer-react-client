@@ -6,12 +6,12 @@ interface IAppTextFieldProps {
 }
 
 export const AppTextField = (props: IAppTextFieldProps | TextFieldProps) => {
-    const  {variant, ...rest} = props
+    const  {variant, ...other} = props
 
     return (
         <TextField
             variant={variant || 'outlined'}
-            {...rest}
+            {...other}
         />
     )
 }
