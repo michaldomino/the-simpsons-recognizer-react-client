@@ -3,9 +3,11 @@ import {HomeContainer} from "./HomeContainer";
 import {useForm} from "react-hook-form";
 import {PredictionResponse} from "../../models/responses/PredictionResponse";
 import {ImageApiService} from "../../services/api/ImageApiService";
+import {useAuthenticationState} from "../../context/authentication/producer";
 
 export const Home: React.FC = () => {
     const {handleSubmit} = useForm()
+    const authenticationState = useAuthenticationState()
     const [image, setImage] = useState<File>()
     const [prediction, setPrediction] = useState('')
     const imageApiService = new ImageApiService()
@@ -14,7 +16,7 @@ export const Home: React.FC = () => {
         try {
             if (image) {
                 setPrediction('...')
-                const response = await imageApiService.predict(image)
+                const response = await imageApiService.predict(image, authenticationState.accessToken)
                 const responseData = await response.json()
                 switch (response.status) {
                     case 200:
