@@ -19,47 +19,50 @@ export const LoginContainer = (props: ILoginContainerProps) => {
         <div>
             <Controls.LoginAppBar/>
             <br/>
-            <FormControl error={formErrors !== ''}>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Grid container
-                          justify="center"
-                          direction="column"
-                          alignItems="center"
-                          spacing={2}
-                    >
-                        <Grid item>
-                            <Controls.AppTextField
-                                inputRef={register}
-                                name='username'
-                                label='Username'
-                                error={usernameErrors !== ''}
-                                helperText={usernameErrors}
-                            />
-                        </Grid>
 
-                        <Grid item>
-                            <Controls.AppTextField
-                                inputRef={register}
-                                name='password'
-                                label='Password'
-                                type='password'
-                                error={passwordErrors !== ''}
-                                helperText={passwordErrors}
-                            />
-                        </Grid>
+            <Grid container justify='center'>
+                <FormControl error={formErrors !== ''}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <Grid container
+                              justify="center"
+                              direction="column"
+                              alignItems="center"
+                              spacing={2}
+                        >
+                            <Grid item>
+                                <Controls.AppTextField
+                                    inputRef={register}
+                                    name='username'
+                                    label='Username'
+                                    error={usernameErrors !== ''}
+                                    helperText={usernameErrors}
+                                />
+                            </Grid>
 
-                        <Grid item>
-                            <FormHelperText>{formErrors}</FormHelperText>
-                        </Grid>
+                            <Grid item>
+                                <Controls.AppTextField
+                                    inputRef={register}
+                                    name='password'
+                                    label='Password'
+                                    type='password'
+                                    error={passwordErrors !== ''}
+                                    helperText={passwordErrors}
+                                />
+                            </Grid>
 
-                        <Grid item>
-                            <Controls.AppButton type='submit'>
-                                Submit
-                            </Controls.AppButton>
+                            <Grid item>
+                                <FormHelperText>{formErrors}</FormHelperText>
+                            </Grid>
+
+                            <Grid item>
+                                <Controls.AppButton type='submit'>
+                                    Submit
+                                </Controls.AppButton>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </form>
-            </FormControl>
+                    </form>
+                </FormControl>
+            </Grid>
         </div>
     )
 }

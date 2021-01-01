@@ -27,7 +27,7 @@ export const HomeContainer: React.FC<IHomeContainerProps> = (props) => {
                 <Grid item>
                     <input
                         accept="image/*"
-                        style={{display: 'none'}}
+                        hidden
                         id="raised-button-file"
                         multiple
                         type="file"

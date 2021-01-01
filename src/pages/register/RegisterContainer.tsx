@@ -22,8 +22,8 @@ export const RegisterContainer: React.FC<IRegisterContainerProps> = (props) => {
             <br/>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Grid container
-                      justify="center"
-                      direction="column"
+                      justify='center'
+                      direction='column'
                       alignItems="center"
                       spacing={2}
                 >

@@ -1,6 +1,6 @@
-import React from 'react';
-import {BrowserRouter, Switch} from 'react-router-dom';
-import './App.css';
+import React from "react";
+import {BrowserRouter, Switch} from "react-router-dom";
+import "./App.css";
 import {AuthenticationProvider} from "./context/authentication/producer";
 import routes from "./config/routes";
 
