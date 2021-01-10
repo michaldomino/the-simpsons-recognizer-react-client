@@ -12,7 +12,15 @@ export const Register: React.FC = () => {
     const [emailErrors, setEmailErrors] = useState('')
     const [passwordErrors, setPasswordErrors] = useState('')
     const [password2Errors, setPassword2Errors] = useState('')
+    const [registerSuccess, setRegisterSuccess] = useState(false)
     const authenticationService = new AuthenticationApiService()
+
+    const handleSnackbarClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setRegisterSuccess(false)
+    }
 
     const onSubmit = async (registerData: RegisterData) => {
         setUsernameErrors('')
@@ -31,6 +39,7 @@ export const Register: React.FC = () => {
         switch (response.status) {
             case 201:
                 console.log(registerResponse as UserCreatedResponse)
+                setRegisterSuccess(true)
                 break
             case 400:
                 const registerBadResponse = registerResponse as RegisterBadResponse
@@ -57,6 +66,8 @@ export const Register: React.FC = () => {
             emailErrors={emailErrors}
             passwordErrors={passwordErrors}
             password2Errors={password2Errors}
+            registerSuccess={registerSuccess}
+            handleSnackbarClose={handleSnackbarClose}
         />
     )
 }
