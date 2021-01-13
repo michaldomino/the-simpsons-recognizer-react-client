@@ -1,5 +1,5 @@
 import React from "react";
-import {Redirect, Route, RouteProps} from 'react-router';
+import {Redirect, Route, RouteProps} from "react-router";
 import {useAuthenticationState} from "../context/authentication/producer";
 
 

@@ -1,7 +1,8 @@
 import React from "react";
 import {Controls} from "../../components/controls/Controls";
-import {Grid} from "@material-ui/core";
+import {Grid, Snackbar} from "@material-ui/core";
 import {RegisterData} from "../../models/RegisterData";
+import {Alert} from "@material-ui/lab";
 
 interface IRegisterContainerProps {
     handleSubmit: any,
@@ -11,21 +12,39 @@ interface IRegisterContainerProps {
     emailErrors: string,
     passwordErrors: string,
     password2Errors: string,
+    registerSuccess: boolean
+    handleSnackbarClose: (event?: React.SyntheticEvent, reason?: string) => void
 }
 
 export const RegisterContainer: React.FC<IRegisterContainerProps> = (props) => {
-    const {handleSubmit, onSubmit, register, usernameErrors, emailErrors, passwordErrors, password2Errors} = props
+    const {
+        handleSubmit,
+        onSubmit,
+        register,
+        usernameErrors,
+        emailErrors,
+        passwordErrors,
+        password2Errors,
+        registerSuccess,
+        handleSnackbarClose
+    } = props
 
     return (
         <div>
             <Controls.RegisterAppBar/>
+            <Snackbar open={registerSuccess} autoHideDuration={6000} onClose={handleSnackbarClose}>
+                <Alert variant='filled' severity='success'>
+                    Successfully created an account!
+                </Alert>
+            </Snackbar>
             <br/>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Grid container
-                      justify="center"
-                      direction="column"
+                      justify='center'
+                      direction='column'
                       alignItems="center"
                       spacing={2}
+                      style={{width:'100%'}}
                 >
                     <Grid item>
                         <Controls.AppTextField
@@ -70,7 +89,9 @@ export const RegisterContainer: React.FC<IRegisterContainerProps> = (props) => {
                     </Grid>
 
                     <Grid item>
-                        <Controls.AppButton text='Submit' type='submit'/>
+                        <Controls.AppButton type='submit'>
+                            Submit
+                        </Controls.AppButton>
                     </Grid>
                 </Grid>
             </form>

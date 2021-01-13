@@ -23,7 +23,7 @@ export const Login: React.FC = () => {
         try {
             setUsernameErrors('')
             setPasswordErrors('')
-            dispatch({type: "REQUEST_LOGIN"})
+            dispatch({type: 'REQUEST_LOGIN'})
             const response = await authenticationService.login(loginData)
             const loginResponse = await response.json()
             console.log(loginResponse)

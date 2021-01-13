@@ -1,5 +1,5 @@
-import React, {Dispatch, useReducer} from 'react'
-import {AuthenticationAction, authenticationReducer, initialState} from './reducer'
+import React, {Dispatch, useReducer} from "react"
+import {AuthenticationAction, authenticationReducer, initialState} from "./reducer"
 
 const AuthenticationStateContext = React.createContext(initialState)
 const AuthenticationDispatchContext = React.createContext({} as Dispatch<AuthenticationAction>)
